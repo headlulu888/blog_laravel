@@ -11,16 +11,41 @@
 |
 */
 
+/**
+ * Главная
+ */
 Route::get('/', function () {
     return view('welcome');
 });
 
+/**
+ * Регистрация
+ */
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+/**
+ * Страница блога
+ */
 Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function() {
     Route::resource('posts', 'PostController')->names('blog.posts');
 });
 
+/**
+ * Страница Админ/категории
+ */
+$groupData = [
+    'namespace' => 'Blog\Admin',
+    'prefix' => 'admin/blog',
+];
+
+Route::group($groupData, function() {
+    // BlogCategory
+    $methods = ['index', 'edit', 'update', 'create', 'store'];
+    Route::resource('categories', 'CategoryController')
+        ->only($methods)
+        ->names('blog.admin.categories');
+});
+
 //Route::resource('rest', 'RestTestController')->names('restTest');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
