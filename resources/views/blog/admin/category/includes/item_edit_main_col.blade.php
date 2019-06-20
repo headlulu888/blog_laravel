@@ -53,9 +53,8 @@
                             <label for="description">Описание</label>
                             <textarea name="description"
                                       id="description"
-                                      class="form-group"
-                                      rows="3">
-                                {{$item->description}}
+                                      class="form-control"
+                                      rows="3">{{ old('description', $item->description)  }}
                             </textarea>
                         </div>
                     </div>

@@ -2,9 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BlogCategory extends Model
+class BlogCategory extends \Eloquent
 {
+    use SoftDeletes;
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'parent_id',
+        'description'
+    ];
 }
