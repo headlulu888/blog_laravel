@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Blog\Admin;
 use App\Http\Requests\BlogCategoryCreateRequest;
 use App\Http\Requests\BlogCategoryUpdateRequest;
 use App\Models\BlogCategory;
-use Illuminate\Http\Request;
 
 class CategoryController extends BaseController
 {
@@ -47,10 +46,6 @@ class CategoryController extends BaseController
         if (empty($data['slug'])) {
             $data['slug'] = str_slug($data['title']);
         }
-
-        // Создаст обьект но не добавит в БД
-        /*$item = new BlogCategory($data);
-        $item->save();*/
 
         // Создаст обьект и добавит в БД
         $item = (new BlogCategory())->create($data);
@@ -101,8 +96,6 @@ class CategoryController extends BaseController
             $data['slug'] = str_slug($data['title']);
         }
 
-        // $result = $item->fill($data)->save();
-        // Или можно так!
         $result = $item->update($data);
 
         if ($result) {
