@@ -28,8 +28,6 @@ class CategoryController extends BaseController
      */
     public function index()
     {
-        //$paginator = BlogCategory::paginate(15);
-
         $paginator = $this->blogCategoryRepository->getAllWithPaginate(5);
 
         return view('blog.admin.category.index', compact('paginator'));
@@ -43,8 +41,6 @@ class CategoryController extends BaseController
     public function create()
     {
         $item = new BlogCategory();
-        // $categoryList = BlogCategory::all();
-
         $categoryList = $this->blogCategoryRepository->getForComboBox();
 
         return view('blog.admin.category.edit', compact('item', 'categoryList'));
@@ -84,9 +80,6 @@ class CategoryController extends BaseController
      */
     public function edit( $id)
     {
-        // $item = BlogCategory::findOrFail($id);
-        // $categoryList = BlogCategory::all();
-
         $item = $this->blogCategoryRepository->getEdit($id);
 
         if (empty($item)) {
@@ -107,8 +100,6 @@ class CategoryController extends BaseController
      */
     public function update(BlogCategoryUpdateRequest $request, $id)
     {
-        // $item = BlogCategory::find($id);
-
         $item = $this->blogCategoryRepository->getEdit($id);
 
         if (empty($item)) {

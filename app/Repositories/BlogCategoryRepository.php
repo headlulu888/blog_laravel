@@ -22,25 +22,15 @@ class BlogCategoryRepository extends CoreRepo
      */
     public function getForComboBox()
     {
-        // return $this->startConditions()->all();
-
         $fields = implode(',', [
             'id',
             'CONCAT (id, ". ", title) AS id_title',
         ]);
 
-        /*$result[] = $this->startConditions()->all();
-        $result[] = $this
-            ->startConditions()
-            ->select('blog_categories.*',
-                \DB::raw('CONCAT (id, ". ", title) AS id_title'))
-            ->toBase()
-            ->get();*/
-
         $result = $this
             ->startConditions()
             ->selectRaw($fields)
-            //->toBase()
+            ->toBase()
             ->get();
 
         return $result;
