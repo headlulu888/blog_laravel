@@ -10,13 +10,27 @@ use App\Repositories\BlogCategoryRepository;
 class CategoryController extends BaseController
 {
     /**
+     * @var BlogCategoryRepository
+     */
+    private $blogCategoryRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $paginator = BlogCategory::paginate(15);
+        //$paginator = BlogCategory::paginate(15);
+
+        $paginator = $this->blogCategoryRepository->getAllWithPaginate(5);
 
         return view('blog.admin.category.index', compact('paginator'));
     }
@@ -29,7 +43,9 @@ class CategoryController extends BaseController
     public function create()
     {
         $item = new BlogCategory();
-        $categoryList = BlogCategory::all();
+        // $categoryList = BlogCategory::all();
+
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
 
         return view('blog.admin.category.edit', compact('item', 'categoryList'));
     }
@@ -63,22 +79,21 @@ class CategoryController extends BaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param BlogCategoryRepository $categoryRepository
      * @param  int $id
      * @return void
      */
-    public function edit( $id, BlogCategoryRepository $categoryRepository)
+    public function edit( $id)
     {
         // $item = BlogCategory::findOrFail($id);
         // $categoryList = BlogCategory::all();
 
-        $item = $categoryRepository->getEdit($id);
+        $item = $this->blogCategoryRepository->getEdit($id);
 
         if (empty($item)) {
             abort(404);
         }
 
-        $categoryList = $categoryRepository->getForComboBox();
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
 
         return view('blog.admin.category.edit', compact('item', 'categoryList'));
     }
@@ -92,7 +107,9 @@ class CategoryController extends BaseController
      */
     public function update(BlogCategoryUpdateRequest $request, $id)
     {
-        $item = BlogCategory::find($id);
+        // $item = BlogCategory::find($id);
+
+        $item = $this->blogCategoryRepository->getEdit($id);
 
         if (empty($item)) {
             return back()
