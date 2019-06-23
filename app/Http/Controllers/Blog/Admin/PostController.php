@@ -1,13 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Blog;
+namespace App\Http\Controllers\Blog\Admin;
 
-use App\Models\BlogPost;
+
+use App\Repositories\BlogPostRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class PostController extends BaseController
 {
+    /**
+     * @var BlogPostRepository
+     */
+    private $blogPostRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->blogPostRepository = app(BlogPostRepository::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,11 +27,17 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $items = BlogPost::all();
+        return view('blog.admin.posts.index');
+    }
 
-//        dd($items->first());
-
-        return view('blog.posts.index', compact('items'));
+    /**
+     * Show the form
+     *
+     * @return void
+     */
+    public function show()
+    {
+        //
     }
 
     /**
@@ -35,21 +53,10 @@ class PostController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      * @return void
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return void
-     */
-    public function show($id)
     {
         //
     }
@@ -68,22 +75,21 @@ class PostController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int $id
      * @return void
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         //
     }
 
     /**
-     * Remove the specified resource from storage.
+     * delete the specified resource in storage.
      *
      * @param  int $id
      * @return void
      */
-    public function destroy($id)
+    public function delete($id)
     {
         //
     }
