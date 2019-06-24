@@ -35,12 +35,12 @@ Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function() {
 /**
  * Страница Админ/категории
  */
-$groupData = [
-    'namespace' => 'Blog\Admin',
-    'prefix' => 'admin/blog',
-];
+//$groupData = [
+//    'namespace' => 'Blog\Admin',
+//    'prefix' => 'admin/blog',
+//];
 
-Route::group($groupData, function() {
+Route::group(['namespace' => 'Blog\Admin', 'prefix' => 'admin/blog'], function() {
     // BlogCategory
     $methods = ['index', 'edit', 'update', 'create', 'store'];
     Route::resource('categories', 'CategoryController')
