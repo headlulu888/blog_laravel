@@ -46,4 +46,9 @@ class BlogPostRepository extends CoreRepo
             //dd($result->first());
         return $result;
     }
+
+    public function getEdit($id)
+    {
+        return $this->startConditions()->find($id);
+    }
 }
