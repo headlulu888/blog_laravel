@@ -5,10 +5,10 @@
         @include('blog.admin.posts.includes.result_messages')
 
         @if ($item->exists)
-            <form action="POST" action="{{ route('blog.admin.posts.update', $item->id) }}">
+            <form method="POST" action="{{ route('blog.admin.posts.update', $item->id) }}">
                 @method('PATCH')
         @else
-            <form method="POSTS" action="{{ route('blog.admin.posts.store') }}">
+            <form method="POST" action="{{ route('blog.admin.posts.store') }}">
                 @method()
         @endif
 
@@ -32,7 +32,7 @@
                     <div class="col-md-8">
                         <div class="card card-block">
                             <div class="card-body ml-auto">
-                                <button type="submit" class="btn btn-link">Delete</button>
+                                <button type="submit" class="btn btn-primary">Delete</button>
                             </div>
                         </div>
                     </div>

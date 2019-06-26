@@ -75,7 +75,7 @@ class PostController extends BaseController
 
         $categoryList = $this->blogCategoryRepository->getForCombobox();
 
-        return view('blog.admin.category.edit', compact('item', 'categoryList'));
+        return view('blog.admin.posts.edit', compact('item', 'categoryList'));
     }
 
     /**
@@ -96,7 +96,7 @@ class PostController extends BaseController
      * @param  int $id
      * @return void
      */
-    public function delete($id)
+    public function destroy($id)
     {
         dd(__METHOD__, request()->all(), $id);
     }
