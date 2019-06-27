@@ -5,7 +5,7 @@
                 @if ($item->is_published)
                      Опубликовано
                 @else
-                    Чернокив
+                    Черновик
                 @endif
             </div>
             <div class="card-body">
@@ -91,7 +91,8 @@
                             <input type="checkbox"
                                    name="is_published"
                                    class="form-check-input"
-                                   value="{{ $item->is_published }}"
+                                   id="is_published"
+                                   value="1"
                                    @if ($item->is_published) checked="checked" @endif
                             >
                             <label for="is_published" class="form-check-label">Опубликовано</label>
