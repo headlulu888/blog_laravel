@@ -3,7 +3,12 @@
 namespace App\Observers;
 
 use App\Models\BlogCategory;
+use Illuminate\Support\Str;
 
+/**
+ * Class BlogCategorObserver
+ * @package App\Observers
+ */
 class BlogCategorObserver
 {
     /**
@@ -18,6 +23,24 @@ class BlogCategorObserver
     }
 
     /**
+     * @param BlogCategory $blogCategory
+     */
+    public function creating(BlogCategory $blogCategory)
+    {
+        $this->setSlug($blogCategory);
+    }
+
+    /**
+     * @param BlogCategory $blogCategory
+     */
+    protected function setSlug(BlogCategory $blogCategory)
+    {
+        if (empty($blogCategory->slug)) {
+            $blogCategory->slug = Str::slug($blogCategory->title);
+        }
+    }
+
+    /**
      * Handle the models blog category "updated" event.
      *
      * @param BlogCategory $blogCategory
@@ -26,6 +49,15 @@ class BlogCategorObserver
     public function updated(BlogCategory $blogCategory)
     {
         //
+    }
+
+    /**
+     * @param BlogCategory $blogCategory
+     */
+    public function updating(BlogCategory $blogCategory)
+    {
+//        dd(__METHOD__, $blogCategory->isDirty(), $blogCategory->getDirty());
+        $this->setSlug($blogCategory);
     }
 
     /**
