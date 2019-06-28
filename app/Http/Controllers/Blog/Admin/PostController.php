@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
+use App\Http\Requests\BlogPostCreateRequest;
 use App\Http\Requests\BlogPostUpdateRequest;
 use App\Models\BlogPost;
 use App\Repositories\BlogCategoryRepository;
 use App\Repositories\BlogPostRepository;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -52,16 +54,17 @@ class PostController extends BaseController
         $item = new BlogPost();
         $categoryList = $this->blogCategoryRepository->getForComboBox();
 
+//        return view('blog.admin.posts.edit', compact('item', 'categoryList'));
         return view('blog.admin.posts.edit', compact('item', 'categoryList'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param BlogPostCreate $request
+     * @param BlogPostCreateRequest $request
      * @return void
      */
-    public function store(BlogPostCreate $request)
+    public function store(BlogPostCreateRequest $request)
     {
         $data = $request->input();
         $item = (new BlogPost())->create($data);

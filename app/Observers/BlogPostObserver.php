@@ -17,10 +17,10 @@ class BlogPostObserver
      */
     public function creating(BlogPost $blogPost)
     {
-//        $this->setPublished($blogPost);
+        $this->setPublishedAt($blogPost);
         $this->setSlug($blogPost);
-//        $this->setHtml($blogPost);
-//        $this->setUser($blogPost);
+        $this->setHtml($blogPost);
+        $this->setUser($blogPost);
     }
 
     /**
@@ -48,6 +48,21 @@ class BlogPostObserver
         if (empty($blogPost->published_at) && $blogPost->is_published) {
             $blogPost->published_at = Carbon::now();
         }
+    }
+
+    /**
+     * @param BlogPost $blogPost
+     */
+    protected function setHtml(BlogPost $blogPost)
+    {
+        if ($blogPost->isDirty('content_raw')) {
+            $blogPost->content_html = $blogPost->content_raw;
+        }
+    }
+
+    protected function setUser(BlogPost $blogPost)
+    {
+        $blogPost->user_id = auth()->id() ?? BlogPost::UNKNOWN_USER;
     }
 
     /**

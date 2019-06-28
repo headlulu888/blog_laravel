@@ -9,7 +9,6 @@
                 @method('PATCH')
         @else
             <form method="POST" action="{{ route('blog.admin.posts.store') }}">
-                @method()
         @endif
 
             @csrf
