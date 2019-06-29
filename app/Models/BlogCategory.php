@@ -56,4 +56,21 @@ class BlogCategory extends \Eloquent
     {
         return $this->id = BlogCategory::ROOT;
     }
+
+    /**
+     * @param $valueFromObject
+     * @return bool|mixed|null|string|string[]
+     */
+    public function getTitleAttribute($valueFromObject)
+    {
+        return mb_strtoupper($valueFromObject);
+    }
+
+    /**
+     * @param $incomingValue
+     */
+    public function setTitleAttribute($incomingValue)
+    {
+        $this->attributes['title'] = mb_strtoupper($incomingValue);
+    }
 }
