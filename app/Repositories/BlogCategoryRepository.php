@@ -6,6 +6,10 @@ use App\Models\BlogCategory as Model;
 use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\CoreRepository as CoreRepo;
 
+/**
+ * Class BlogCategoryRepository
+ * @package App\Repositories
+ */
 class BlogCategoryRepository extends CoreRepo
 {
     /**
@@ -44,10 +48,20 @@ class BlogCategoryRepository extends CoreRepo
         return Model::class;
     }
 
+    /**
+     * @param null $perPage
+     * @return mixed
+     */
     public function getAllWithPaginate($perPage = null)
     {
         $fields = ['id', 'title', 'parent_id'];
-        $result = $this->startConditions()->select($fields)->paginate($perPage);
+        $result = $this
+            ->startConditions()
+            ->select($fields)
+            ->with([
+                'parentCategory:id,title'
+            ])
+            ->paginate($perPage);
 
         return $result;
     }
