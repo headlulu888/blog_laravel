@@ -151,10 +151,10 @@ class PostController extends BaseController
         //dd(__METHOD__, request()->all(), $id);
 
         // Удалит и оставит в базе время удаления
-        // $result = BlogPost::destroy($id);
+        $result = BlogPost::destroy($id);
 
         // Удалит полностью из базы
-        $result = BlogPost::find($id)->forceDelete();
+        // $result = BlogPost::find($id)->forceDelete();
 
         if ($result) {
             return redirect()
