@@ -71,6 +71,42 @@ class DiggingDeeperController extends Controller
             return $newItem;
         });
 
-        dd($collection);
+        // dd($collection);
+
+        $newItem = new \stdClass();
+        $newItem->id = 9999;
+
+        $newItem2 = new \stdClass();
+        $newItem2->id = 8888;
+
+        // dd($newItem, $newItem2);
+
+//        $collection->prepend($newItem);
+//        $collection->push($newItem2);
+//        dd($collection);
+
+//        $newItemFirst = $collection->prepend($newItem)->first();
+//        $newItemLast = $collection->push($newItem2)->last();
+//        $pulledItem = $collection->pull(1);
+//
+//        dd(compact('collection', 'newItemFirst', 'newItemLast', 'pulledItem'));
+
+
+//        $filtered = $collection->filter(function ($item) {
+//            $byDay = $item->created_at->isFriday();
+//            $byDate = $item->created_at->day == 12;
+//
+//            $result = $byDay && $byDate;
+//
+//            return $result;
+//        });
+
+//        dd(compact('filtered'));
+
+        $sortedSimpleCollection = collect([5, 3, 1, 2, 4])->sort();
+        $sortedAscCollection = $collection->sortBy('created_at');
+        $sortedDescCollection = $collection->sortByDesc('item_id');
+
+        dd(compact('sortedSimpleCollection', 'sortedAscCollection', 'sortedDescCollection'));
     }
 }
